@@ -1,4 +1,4 @@
-package com.weatherforecastapp.data.network.service;
+package com.weatherforecastapp.network.service;
 
 import com.weatherforecastapp.data.model.ForecastResponse;
 
@@ -13,4 +13,7 @@ public interface WeatherForecastGETService {
 
     @GET("forecast")
     Call<ForecastResponse> get5dayWeatherForecastByName(@Query("q") String cityName);
+
+    @GET("forecast")
+    Call<ForecastResponse> get5dayWeatherForecastByZip(@Query("zip") String cityName);
 }

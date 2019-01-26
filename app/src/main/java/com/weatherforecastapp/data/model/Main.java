@@ -26,7 +26,7 @@ public class Main {
     public Integer humidity;
 
     @SerializedName("temp_kf")
-    public Integer tempKf;
+    public Double tempKf;
 
     public Double getTemp() {
         return temp;
@@ -56,7 +56,7 @@ public class Main {
         return humidity;
     }
 
-    public Integer getTempKf() {
+    public Double getTempKf() {
         return tempKf;
     }
 }

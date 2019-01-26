@@ -1,8 +1,6 @@
-package com.weatherforecastapp.data.network;
+package com.weatherforecastapp.network;
 
-import com.weatherforecastapp.data.network.interceptor.ApiKeyInterceptor;
-
-import java.util.concurrent.TimeUnit;
+import com.weatherforecastapp.network.interceptor.ApiKeyInterceptor;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -10,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.weatherforecastapp.data.network.Constants.BASE_URL;
+import static com.weatherforecastapp.network.Constants.BASE_URL;
 
 public class RetrofitInstance {
 

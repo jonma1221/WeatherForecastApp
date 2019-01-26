@@ -1,4 +1,4 @@
-package com.weatherforecastapp.data.network.interceptor;
+package com.weatherforecastapp.network.interceptor;
 
 import com.weatherforecastapp.BuildConfig;
 
@@ -14,7 +14,7 @@ public class ApiKeyInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
         HttpUrl newUrl = original.url().newBuilder()
-                .addQueryParameter("api_key", BuildConfig.WeatherApiKey).build();
+                .addQueryParameter("appid", BuildConfig.WeatherApiKey).build();
 
         Request.Builder builder = original.newBuilder().url(newUrl);
         Request request = builder.build();
