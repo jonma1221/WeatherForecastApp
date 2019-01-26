@@ -3,7 +3,7 @@ package com.weatherforecastapp.data.source.remote;
 public class WeatherDataSourceImpl implements WeatherDataSource {
     @Override
     public void retrieve5dayForecastByCityName(String cityName) {
-        
+
     }
 
     @Override
