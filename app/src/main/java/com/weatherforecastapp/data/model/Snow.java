@@ -1,11 +1,11 @@
-package com.weatherforecastapp.data;
+package com.weatherforecastapp.data.model;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Rain {
+public class Snow {
 
     @SerializedName("3h")
-    @Expose
     public Double _3h;
 
     public Double get_3h() {

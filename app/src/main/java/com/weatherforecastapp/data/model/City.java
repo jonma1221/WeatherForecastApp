@@ -1,6 +1,5 @@
-package com.weatherforecastapp.data;
+package com.weatherforecastapp.data.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class City {
