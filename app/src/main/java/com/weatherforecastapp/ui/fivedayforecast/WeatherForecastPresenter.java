@@ -14,6 +14,10 @@ public class WeatherForecastPresenter implements WeatherForecastContract.Present
         this.weatherDataSource = weatherDataSource;
     }
 
+    public void destroyView(){
+        mView = null;
+    }
+
     @Override
     public void getTodayForecastName(String cityName) {
         weatherDataSource.retrieveCurrentWeatherByCityName(cityName, new WeatherDataSource.WeatherForecastCallback<DailyWeather>() {

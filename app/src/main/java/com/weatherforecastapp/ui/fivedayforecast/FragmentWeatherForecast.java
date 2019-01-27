@@ -92,6 +92,14 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
         return v;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mPresenter != null){
+            mPresenter.destroyView();
+        }
+    }
+
     private void setUpTodayWeather(DailyWeather forecastDetail) {
         // current temp
         String tempMax = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().getTempMax());
