@@ -3,10 +3,10 @@ package com.weatherforecastapp.ui.fivedayforecast;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +27,7 @@ import com.weatherforecastapp.ui.util.WindDirectionFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +36,8 @@ import static com.weatherforecastapp.network.Constants.BASE_URL_IMG;
 import static com.weatherforecastapp.network.Constants.IMG_PATH;
 
 public class FragmentWeatherForecast extends Fragment implements WeatherForecastContract.View {
-    @BindView(R.id.root)
-    ConstraintLayout root;
+    @BindView(R.id.today_weather_searchView)
+    SearchView searchView;
     @BindView(R.id.today_weather_temp)
     TextView todayWeatherTemp;
     @BindView(R.id.today_weather_temp_desc)
@@ -67,12 +68,25 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
         ButterKnife.bind(this, v);
         setUpRecyclerView();
         setUpPresenter();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                mPresenter.get5dayWeatherForecastName(s);
+                mPresenter.getTodayForecastName(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         return v;
     }
 
     private void setUpTodayWeather(DailyWeather forecastDetail) {
         // current temp
-        String temp = String.format("%.0f", forecastDetail.getMain().temp);
+        String temp = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().temp);
         todayWeatherTemp.setText(temp  + (char) 0x00B0 + "F");
         // weather description
         todayWeatherTempDesc.setText(forecastDetail.getWeather().get(0).getDescription());
@@ -80,7 +94,7 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
         String windDirection = WindDirectionFormatter.getWindDirection(forecastDetail.getWind().getDeg());
         String windSpeed = forecastDetail.getWind().getSpeed() + " mph ";
         todayWeatherWindSpeed.setText(windSpeed + windDirection);
-
+        // icon
         String imgUrl = BASE_URL_IMG + IMG_PATH + forecastDetail.getWeather().get(0).getIcon() + ".png";
         Glide.with(getContext())
                 .load(imgUrl)
@@ -106,6 +120,8 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
 
     @Override
     public void onTodayForecastRetrieved(DailyWeather dailyWeather) {
+        searchView.setQuery(dailyWeather.getName(), false);
+        searchView.clearFocus();
         setUpTodayWeather(dailyWeather);
     }
 
@@ -117,6 +133,6 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
             nextFiveDays.add(forecastDetails.get(i));
         }
         fiveDayView.setNext5days(nextFiveDays);
-        hourUpdatesAdapter.add(forecastDetails.subList(1, 8));
+        hourUpdatesAdapter.replace(forecastDetails.subList(1, 8));
     }
 }

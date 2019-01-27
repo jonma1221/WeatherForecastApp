@@ -9,7 +9,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.SearchView
-        android:id="@+id/fragment_giphy_list_searchView"
+        android:id="@+id/today_weather_searchView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="12dp"
@@ -28,7 +28,7 @@
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_giphy_list_searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/today_weather_searchView" />
 
     <TextView
         android:id="@+id/today_weather_temp"
