@@ -11,17 +11,17 @@
 1. locate apk AndroidStudioProjects/WeatherForecastApp/app/build/outputs/apk/debug/app-debug.apk
 2. install and run apk
 
-#Use
+# Use
 You can search by city name and it will display the current day weather as well as the forecast for
 the next 5 days.
 
-#Features
+# Features
 - can search by city name
 - display information such as date, weather and description, wind speed/direction as well as 3 hour
   updates for the current day
 - shows the icons for the weather condition
 
-#Improvements
+# Improvements
 - Offline search and cache to avoid redundant search
 - Handling rotation so that information isn't refetched when the fragment is recreated
 - Adding an option to use current location, but that would also involve handling runtime permissions
