@@ -23,6 +23,7 @@ import com.weatherforecastapp.data.model.ForecastResponse;
 import com.weatherforecastapp.data.source.remote.WeatherDataSourceImpl;
 import com.weatherforecastapp.ui.threehourupdates.ThreeHourUpdatesAdapter;
 import com.weatherforecastapp.ui.util.ItemSpaceDecoration;
+import com.weatherforecastapp.ui.util.TimeFormatter;
 import com.weatherforecastapp.ui.util.WindDirectionFormatter;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
     SearchView searchView;
     @BindView(R.id.today_weather_temp)
     TextView todayWeatherTemp;
+    @BindView(R.id.today_date_desc)
+    TextView todayDate;
     @BindView(R.id.today_weather_temp_desc)
     TextView todayWeatherTempDesc;
     @BindView(R.id.today_weather_wind_speed)
@@ -94,6 +97,10 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
         String tempMax = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().getTempMax());
         String temp = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().temp);
         todayWeatherTemp.setText(temp  + "/" + tempMax + (char) 0x00B0 + TEMP_UNITS_IMPERIAL);
+
+        //date
+        String date = TimeFormatter.getTimeInDayMonthYear(forecastDetail.getDt());
+        todayDate.setText(date);
 
         // weather description
         todayWeatherTempDesc.setText(forecastDetail.getWeather().get(0).getDescription());

@@ -24,4 +24,13 @@ public class TimeFormatter {
         sdf.setTimeZone(tz);
         return sdf.format(date);
     }
+
+    public static String getTimeInDayMonthYear(int currentTimeUnix){
+        Calendar cal = Calendar.getInstance();
+        TimeZone tz = cal.getTimeZone();
+        Date date = new Date(currentTimeUnix * 1000L);
+        SimpleDateFormat sdf = new SimpleDateFormat("E, MMM d, yyyy", Locale.getDefault());
+        sdf.setTimeZone(tz);
+        return sdf.format(date);
+    }
 }

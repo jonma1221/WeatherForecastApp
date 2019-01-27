@@ -43,12 +43,34 @@
         app:layout_constraintTop_toBottomOf="@+id/today_weather_temp_icon" />
 
     <LinearLayout
-        android:id="@+id/today_temp_desc"
+        android:id="@+id/today_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/today_weather_temp"
         app:layout_constraintTop_toBottomOf="@+id/today_weather_temp">
+        <ImageView
+            android:id="@+id/today_date_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_date_range_white_24dp"/>
+
+        <TextView
+            android:id="@+id/today_date_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/paddingSmall"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSmall" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/today_temp_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/today_weather_temp"
+        app:layout_constraintTop_toBottomOf="@+id/today_date">
         <ImageView
             android:id="@+id/today_weather_temp_desc_icon"
             android:layout_width="wrap_content"
