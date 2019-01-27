@@ -1,12 +1,13 @@
 # WeatherForecastApp
-#Install
+# Install
 1.Find the github's repository url
 2.Click the clone or download button and click download zip
 3.Extract the zip file
 5.Open Android studio and import the project you just downloaded
 6.Sync gradle
 7.Run the project on emulator or device
-# Alternatively
+
+# Install alternative
 1. locate apk AndroidStudioProjects/WeatherForecastApp/app/build/outputs/apk/debug/app-debug.apk
 2. install and run apk
 
