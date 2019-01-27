@@ -26,7 +26,9 @@ public class WeatherForecastPresenter implements WeatherForecastContract.Present
 
             @Override
             public void onError() {
-
+                if(mView != null){
+                    mView.onError();
+                }
             }
         });
     }
@@ -43,7 +45,9 @@ public class WeatherForecastPresenter implements WeatherForecastContract.Present
 
             @Override
             public void onError() {
-
+                if(mView != null){
+                    mView.onError();
+                }
             }
         });
     }

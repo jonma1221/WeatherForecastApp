@@ -32,8 +32,11 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.weatherforecastapp.network.Constants.BASE_URL_IMG;
-import static com.weatherforecastapp.network.Constants.IMG_PATH;
+import static com.weatherforecastapp.ui.util.Constants.BASE_URL_IMG;
+import static com.weatherforecastapp.ui.util.Constants.DEFAULT_CITY;
+import static com.weatherforecastapp.ui.util.Constants.IMG_PATH;
+import static com.weatherforecastapp.ui.util.Constants.TEMP_UNITS_IMPERIAL;
+import static com.weatherforecastapp.ui.util.Constants.WIND_UNITS_IMPERIAL;
 
 public class FragmentWeatherForecast extends Fragment implements WeatherForecastContract.View {
     @BindView(R.id.today_weather_searchView)
@@ -48,6 +51,8 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
     ImageView todayWeatherTempIcon;
     @BindView(R.id.five_day_view)
     FiveDayView fiveDayView;
+    @BindView(R.id.error)
+    TextView error;
     @BindView(R.id.three_hour_forecast_recycler_view)
     RecyclerView recyclerView;
 
@@ -86,14 +91,18 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
 
     private void setUpTodayWeather(DailyWeather forecastDetail) {
         // current temp
+        String tempMax = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().getTempMax());
         String temp = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().temp);
-        todayWeatherTemp.setText(temp  + (char) 0x00B0 + "F");
+        todayWeatherTemp.setText(temp  + "/" + tempMax + (char) 0x00B0 + TEMP_UNITS_IMPERIAL);
+
         // weather description
         todayWeatherTempDesc.setText(forecastDetail.getWeather().get(0).getDescription());
+
         // wind speed
         String windDirection = WindDirectionFormatter.getWindDirection(forecastDetail.getWind().getDeg());
-        String windSpeed = forecastDetail.getWind().getSpeed() + " mph ";
-        todayWeatherWindSpeed.setText(windSpeed + windDirection);
+        String windSpeed = forecastDetail.getWind().getSpeed() + WIND_UNITS_IMPERIAL;
+        todayWeatherWindSpeed.setText(windSpeed + " " + windDirection);
+
         // icon
         String imgUrl = BASE_URL_IMG + IMG_PATH + forecastDetail.getWeather().get(0).getIcon() + ".png";
         Glide.with(getContext())
@@ -114,12 +123,13 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
 
     public void setUpPresenter(){
         mPresenter = new WeatherForecastPresenter(this, WeatherDataSourceImpl.getInstance());
-        mPresenter.get5dayWeatherForecastName("danville");
-        mPresenter.getTodayForecastName("danville");
+        mPresenter.get5dayWeatherForecastName(DEFAULT_CITY);
+        mPresenter.getTodayForecastName(DEFAULT_CITY);
     }
 
     @Override
     public void onTodayForecastRetrieved(DailyWeather dailyWeather) {
+        error.setVisibility(View.GONE);
         searchView.setQuery(dailyWeather.getName(), false);
         searchView.clearFocus();
         setUpTodayWeather(dailyWeather);
@@ -127,12 +137,20 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
 
     @Override
     public void on5dayForecastRetrieved(ForecastResponse forecastResponse) {
+        error.setVisibility(View.GONE);
         List<ForecastDetail> forecastDetails = forecastResponse.getList();
-        List<ForecastDetail> nextFiveDays = new ArrayList<>();
-        for(int i = 0; i < forecastDetails.size(); i += 8){
-            nextFiveDays.add(forecastDetails.get(i));
+        if(forecastResponse.getList() != null){
+            List<ForecastDetail> nextFiveDays = new ArrayList<>();
+            for(int i = 0; i < forecastDetails.size(); i += 8){
+                nextFiveDays.add(forecastDetails.get(i));
+            }
+            fiveDayView.setNext5days(nextFiveDays);
+            hourUpdatesAdapter.replace(forecastDetails.subList(1, 8));
         }
-        fiveDayView.setNext5days(nextFiveDays);
-        hourUpdatesAdapter.replace(forecastDetails.subList(1, 8));
+    }
+
+    @Override
+    public void onError() {
+        error.setVisibility(View.VISIBLE);
     }
 }

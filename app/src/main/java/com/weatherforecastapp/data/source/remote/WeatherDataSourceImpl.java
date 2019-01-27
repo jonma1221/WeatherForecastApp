@@ -11,8 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.weatherforecastapp.network.Constants.UNITS_IMPERIAL;
-import static com.weatherforecastapp.network.Constants.UNITS_METRIC;
+import static com.weatherforecastapp.ui.util.Constants.UNITS_IMPERIAL;
 
 public class WeatherDataSourceImpl implements WeatherDataSource {
     private static WeatherDataSourceImpl instance;
@@ -33,12 +32,16 @@ public class WeatherDataSourceImpl implements WeatherDataSource {
         call.enqueue(new Callback<DailyWeather>() {
             @Override
             public void onResponse(Call<DailyWeather> call, Response<DailyWeather> response) {
-                callback.onWeatherForecastRetrieved(response.body());
+                if(response.isSuccessful()){
+                    callback.onWeatherForecastRetrieved(response.body());
+                } else {
+                    callback.onError();
+                }
             }
 
             @Override
             public void onFailure(Call<DailyWeather> call, Throwable t) {
-
+                callback.onError();
             }
         });
     }
@@ -50,12 +53,16 @@ public class WeatherDataSourceImpl implements WeatherDataSource {
             @Override
             public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
                 ForecastResponse forecastResponse = response.body();
-                callback.onWeatherForecastRetrieved(forecastResponse);
+                if(response.isSuccessful()){
+                    callback.onWeatherForecastRetrieved(forecastResponse);
+                } else {
+                    callback.onError();
+                }
             }
 
             @Override
             public void onFailure(Call<ForecastResponse> call, Throwable t) {
-
+                callback.onError();
             }
         });
     }
@@ -67,12 +74,16 @@ public class WeatherDataSourceImpl implements WeatherDataSource {
             @Override
             public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
                 ForecastResponse forecastResponse = response.body();
-                callback.onWeatherForecastRetrieved(forecastResponse);
+                if(response.isSuccessful()){
+                    callback.onWeatherForecastRetrieved(forecastResponse);
+                } else {
+                    callback.onError();
+                }
             }
 
             @Override
             public void onFailure(Call<ForecastResponse> call, Throwable t) {
-
+                callback.onError();
             }
         });
     }

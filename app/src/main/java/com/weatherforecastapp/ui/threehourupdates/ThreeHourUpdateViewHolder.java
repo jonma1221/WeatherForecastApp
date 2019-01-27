@@ -18,8 +18,9 @@ import java.util.Locale;
 
 import butterknife.BindView;
 
-import static com.weatherforecastapp.network.Constants.BASE_URL_IMG;
-import static com.weatherforecastapp.network.Constants.IMG_PATH;
+import static com.weatherforecastapp.ui.util.Constants.BASE_URL_IMG;
+import static com.weatherforecastapp.ui.util.Constants.IMG_PATH;
+import static com.weatherforecastapp.ui.util.Constants.TEMP_UNITS_IMPERIAL;
 
 public class ThreeHourUpdateViewHolder extends BaseViewHolder<ForecastDetail, BaseAdapter.BaseRecyclerListener> {
 
@@ -38,9 +39,7 @@ public class ThreeHourUpdateViewHolder extends BaseViewHolder<ForecastDetail, Ba
     public void bind(ForecastDetail item) {
         // temp
         String temp = String.format(Locale.getDefault(), "%.0f", item.getMain().getTemp());
-        String tempMax = String.format(Locale.getDefault(), "%.0f", item.getMain().getTempMax());
-//        currentHourTemp.setText(temp  + (char) 0x00B0 + "F / " + tempMax  + (char) 0x00B0 + "F");
-        currentHourTemp.setText(temp  + (char) 0x00B0 + "F");
+        currentHourTemp.setText(temp  + (char) 0x00B0 + TEMP_UNITS_IMPERIAL);
 
         // time
         String formattedDate = TimeFormatter.getTimeinHours(item.getDt());

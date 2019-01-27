@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="M"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/textSmall"
         app:layout_constraintBottom_toTopOf="@+id/single_day_weather_temp_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/single_day_weather_temp_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/single_day_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -32,9 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="32"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/textSmall"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

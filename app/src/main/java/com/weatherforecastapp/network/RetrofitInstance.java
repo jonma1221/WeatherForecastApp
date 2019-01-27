@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.weatherforecastapp.network.Constants.BASE_URL;
+import static com.weatherforecastapp.ui.util.Constants.BASE_URL;
 
 public class RetrofitInstance {
 

@@ -7,6 +7,7 @@ public interface WeatherForecastContract {
     interface View{
         void onTodayForecastRetrieved(DailyWeather dailyWeather);
         void on5dayForecastRetrieved(ForecastResponse forecastResponse);
+        void onError();
     }
 
     interface Presenter{

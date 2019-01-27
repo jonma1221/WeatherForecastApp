@@ -18,8 +18,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.weatherforecastapp.network.Constants.BASE_URL_IMG;
-import static com.weatherforecastapp.network.Constants.IMG_PATH;
+import static com.weatherforecastapp.ui.util.Constants.BASE_URL_IMG;
+import static com.weatherforecastapp.ui.util.Constants.IMG_PATH;
 
 public class SingleDayView extends ConstraintLayout {
 
@@ -53,8 +53,6 @@ public class SingleDayView extends ConstraintLayout {
     public void updateWeather(ForecastDetail forecastDetail){
         // temp
         String temp = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().getTemp());
-        String tempMax = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().getTempMax());
-//        currentHourTemp.setText(temp  + (char) 0x00B0 + "F / " + tempMax  + (char) 0x00B0 + "F");
         currentDayTemp.setText(temp  + (char) 0x00B0 + "F");
 
         // time
