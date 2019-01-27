@@ -1,5 +1,6 @@
 package com.weatherforecastapp.ui.fivedayforecast;
 
+import com.weatherforecastapp.data.model.DailyWeather;
 import com.weatherforecastapp.data.model.ForecastResponse;
 import com.weatherforecastapp.data.source.remote.WeatherDataSource;
 import com.weatherforecastapp.data.source.remote.WeatherDataSourceImpl;
@@ -14,7 +15,20 @@ public class WeatherForecastPresenter implements WeatherForecastContract.Present
     }
 
     @Override
-    public void get5dayWeatherForecastId(String id) {
+    public void getTodayForecastName(String cityName) {
+        weatherDataSource.retrieveCurrentWeatherByCityName(cityName, new WeatherDataSource.WeatherForecastCallback<DailyWeather>() {
+            @Override
+            public void onWeatherForecastRetrieved(DailyWeather item) {
+                if(mView != null){
+                    mView.onTodayForecastRetrieved(item);
+                }
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override
@@ -23,7 +37,7 @@ public class WeatherForecastPresenter implements WeatherForecastContract.Present
             @Override
             public void onWeatherForecastRetrieved(ForecastResponse item) {
                 if(mView != null){
-                    mView.onForecastRetrieved(item);
+                    mView.on5dayForecastRetrieved(item);
                 }
             }
 

@@ -2,6 +2,7 @@ package com.weatherforecastapp.data.source.remote;
 
 import android.util.Log;
 
+import com.weatherforecastapp.data.model.DailyWeather;
 import com.weatherforecastapp.data.model.ForecastResponse;
 import com.weatherforecastapp.network.RetrofitInstance;
 import com.weatherforecastapp.network.service.WeatherForecastGETService;
@@ -24,6 +25,22 @@ public class WeatherDataSourceImpl implements WeatherDataSource {
             instance = new WeatherDataSourceImpl();
         }
         return instance;
+    }
+
+    @Override
+    public void retrieveCurrentWeatherByCityName(String cityName, final WeatherForecastCallback<DailyWeather> callback) {
+        Call<DailyWeather> call = client.getCurrentWeatherForecastByName(cityName, UNITS_IMPERIAL);
+        call.enqueue(new Callback<DailyWeather>() {
+            @Override
+            public void onResponse(Call<DailyWeather> call, Response<DailyWeather> response) {
+                callback.onWeatherForecastRetrieved(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<DailyWeather> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

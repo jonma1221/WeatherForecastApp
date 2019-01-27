@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.weatherforecastapp.R;
+import com.weatherforecastapp.data.model.DailyWeather;
 import com.weatherforecastapp.data.model.ForecastDetail;
 import com.weatherforecastapp.data.model.ForecastResponse;
 import com.weatherforecastapp.data.source.remote.WeatherDataSourceImpl;
@@ -69,7 +70,7 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
         return v;
     }
 
-    private void setUpTodayWeather(ForecastDetail forecastDetail) {
+    private void setUpTodayWeather(DailyWeather forecastDetail) {
         // current temp
         String temp = String.format("%.0f", forecastDetail.getMain().temp);
         todayWeatherTemp.setText(temp  + (char) 0x00B0 + "F");
@@ -100,13 +101,17 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
     public void setUpPresenter(){
         mPresenter = new WeatherForecastPresenter(this, WeatherDataSourceImpl.getInstance());
         mPresenter.get5dayWeatherForecastName("danville");
+        mPresenter.getTodayForecastName("danville");
     }
-    @Override
-    public void onForecastRetrieved(ForecastResponse forecastResponse) {
-        List<ForecastDetail> forecastDetails = forecastResponse.getList();
-        ForecastDetail forecastDetail = forecastDetails.get(0);
-        setUpTodayWeather(forecastDetail);
 
+    @Override
+    public void onTodayForecastRetrieved(DailyWeather dailyWeather) {
+        setUpTodayWeather(dailyWeather);
+    }
+
+    @Override
+    public void on5dayForecastRetrieved(ForecastResponse forecastResponse) {
+        List<ForecastDetail> forecastDetails = forecastResponse.getList();
         List<ForecastDetail> nextFiveDays = new ArrayList<>();
         for(int i = 0; i < forecastDetails.size(); i += 8){
             nextFiveDays.add(forecastDetails.get(i));
