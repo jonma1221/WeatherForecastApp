@@ -12,7 +12,7 @@ public interface WeatherForecastGETService {
     Call<ForecastResponse> get5dayWeatherForecastById(@Query("id") String id);
 
     @GET("forecast")
-    Call<ForecastResponse> get5dayWeatherForecastByName(@Query("q") String cityName);
+    Call<ForecastResponse> get5dayWeatherForecastByName(@Query("q") String cityName, @Query("units") String units);
 
     @GET("forecast")
     Call<ForecastResponse> get5dayWeatherForecastByZip(@Query("zip") String cityName);

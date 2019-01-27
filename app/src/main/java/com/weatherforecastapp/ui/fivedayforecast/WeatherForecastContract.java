@@ -1,4 +1,4 @@
-package com.weatherforecastapp.ui;
+package com.weatherforecastapp.ui.fivedayforecast;
 
 import com.weatherforecastapp.data.model.ForecastResponse;
 

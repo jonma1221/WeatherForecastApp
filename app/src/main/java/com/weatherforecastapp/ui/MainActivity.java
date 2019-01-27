@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.weatherforecastapp.R;
+import com.weatherforecastapp.ui.fivedayforecast.FragmentWeatherForecast;
 
 public class MainActivity extends AppCompatActivity {
 

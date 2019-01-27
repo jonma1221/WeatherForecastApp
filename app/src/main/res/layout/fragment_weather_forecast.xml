@@ -4,18 +4,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/today_weather_temp_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+    <android.support.v7.widget.SearchView
+        android:id="@+id/fragment_giphy_list_searchView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        app:iconifiedByDefault="false"
+        android:focusableInTouchMode="true"
+        app:queryHint="search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/today_weather_temp_icon">
+    </android.support.v7.widget.SearchView>
+
+    <ImageView
+        android:id="@+id/today_weather_temp_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_giphy_list_searchView" />
 
     <TextView
         android:id="@+id/today_weather_temp"
@@ -24,7 +37,7 @@
         android:gravity="center"
         android:text="32"
         android:textColor="@color/white"
-        android:textSize="64sp"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="@+id/today_weather_temp_icon"
         app:layout_constraintStart_toStartOf="@+id/today_weather_temp_icon"
         app:layout_constraintTop_toBottomOf="@+id/today_weather_temp_icon" />
@@ -35,8 +48,48 @@
         android:layout_height="wrap_content"
         android:text="Description"
         android:textColor="@color/white"
+        android:textStyle="normal"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/today_weather_temp"
         app:layout_constraintStart_toStartOf="@+id/today_weather_temp"
         app:layout_constraintTop_toBottomOf="@+id/today_weather_temp" />
+
+    <ImageView
+        android:id="@+id/today_weather_wind_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/wind"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/today_weather_wind_speed"
+        app:layout_constraintStart_toStartOf="@+id/today_weather_temp"
+        app:layout_constraintTop_toBottomOf="@+id/today_weather_temp_desc"/>
+
+    <TextView
+        android:id="@+id/today_weather_wind_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="wind"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/today_weather_wind_icon"
+        app:layout_constraintTop_toBottomOf="@+id/today_weather_temp_desc" />
+
+    <com.weatherforecastapp.ui.fivedayforecast.FiveDayView
+        android:id="@+id/five_day_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/today_weather_wind_speed">
+    </com.weatherforecastapp.ui.fivedayforecast.FiveDayView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/three_hour_forecast_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

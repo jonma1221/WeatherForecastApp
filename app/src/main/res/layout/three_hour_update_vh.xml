@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/current_hour_weather_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="32"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/current_hour_weather_temp_icon"
+        app:layout_constraintEnd_toEndOf="@+id/current_hour_weather_temp_icon"
+        app:layout_constraintStart_toStartOf="@+id/current_hour_weather_temp_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/current_hour_weather_temp_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_hour_weather_temp"/>
+
+    <TextView
+        android:id="@+id/current_hour_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="3:00"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/current_hour_weather_temp_icon"
+        app:layout_constraintStart_toStartOf="@+id/current_hour_weather_temp_icon"
+        app:layout_constraintTop_toBottomOf="@+id/current_hour_weather_temp_icon" />
+</android.support.constraint.ConstraintLayout>

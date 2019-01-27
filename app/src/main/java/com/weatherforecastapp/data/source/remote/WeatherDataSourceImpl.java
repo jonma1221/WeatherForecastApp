@@ -10,6 +10,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.weatherforecastapp.network.Constants.UNITS_IMPERIAL;
+import static com.weatherforecastapp.network.Constants.UNITS_METRIC;
+
 public class WeatherDataSourceImpl implements WeatherDataSource {
     private static WeatherDataSourceImpl instance;
 
@@ -25,7 +28,7 @@ public class WeatherDataSourceImpl implements WeatherDataSource {
 
     @Override
     public void retrieve5dayForecastByCityName(String cityName, final WeatherForecastCallback<ForecastResponse> callback) {
-        Call<ForecastResponse> call = client.get5dayWeatherForecastByName(cityName);
+        Call<ForecastResponse> call = client.get5dayWeatherForecastByName(cityName, UNITS_IMPERIAL);
         call.enqueue(new Callback<ForecastResponse>() {
             @Override
             public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
