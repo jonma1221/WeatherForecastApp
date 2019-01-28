@@ -104,7 +104,7 @@ public class FragmentWeatherForecast extends Fragment implements WeatherForecast
         // current temp
         String tempMax = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().getTempMax());
         String temp = String.format(Locale.getDefault(), "%.0f", forecastDetail.getMain().temp);
-        todayWeatherTemp.setText(temp  + "/" + tempMax + (char) 0x00B0 + TEMP_UNITS_IMPERIAL);
+        todayWeatherTemp.setText(temp + (char) 0x00B0 + TEMP_UNITS_IMPERIAL);
 
         //date
         String date = TimeFormatter.getTimeInDayMonthYear(forecastDetail.getDt());
